@@ -1,0 +1,27 @@
+import os
+import django
+from django.utils import timezone
+from datetime import timedelta
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "cinema.settings")
+django.setup()
+
+from tickets.models import Movie, Show
+
+# Clear old data
+Movie.objects.all().delete()
+Show.objects.all().delete()
+
+# Create Movies
+m1 = Movie.objects.create(title="Interstellar", duration_minutes=169)
+m2 = Movie.objects.create(title="Inception", duration_minutes=148)
+m3 = Movie.objects.create(title="The Dark Knight", duration_minutes=152)
+
+# Create Shows
+now = timezone.now()
+Show.objects.create(movie=m1, screen_name="Screen 1", date_time=now + timedelta(hours=2), total_seats=5)
+Show.objects.create(movie=m1, screen_name="Screen 2", date_time=now + timedelta(hours=5), total_seats=3)
+Show.objects.create(movie=m2, screen_name="Screen 1", date_time=now + timedelta(hours=3), total_seats=4)
+Show.objects.create(movie=m3, screen_name="Screen 3", date_time=now + timedelta(hours=6), total_seats=6)
+
+print("✅ Database seeded with movies and shows!")

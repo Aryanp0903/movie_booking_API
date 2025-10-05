@@ -28,7 +28,5 @@ python manage.py runserver
 # Open http://127.0.0.1:8000/swagger/
 ```
 
-## Run tests
-```bash
-python manage.py test tickets -v 2
-```
+
+
